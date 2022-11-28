@@ -48,14 +48,16 @@ const App = () => {
   const htmlData = data
     .filter((filterName) => filterName.name.toLowerCase().includes(searchName.toLowerCase()))
     .filter((filterCounselor) => {
+      let result = '';
       if (searchCounselor === 'Todos') {
-      
-        return true;
+         result = true;
+        return result;
       }
       else if (filterCounselor.counselor === searchCounselor) {
-        return true;
+        result = true;
+        return result;
       }
-      return true;
+      return result;
     })
     .map((adalaber) => {
       const socialNetworks = (adalaber.social_networks).map((social, index)=> {
