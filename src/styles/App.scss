@@ -15,13 +15,16 @@ body{
 	align-items: center;
 
 }
-
+.superdivtable{
+	display: flex;
+	justify-content: center;
+}
 .table {
 	padding: 20px;
 	color: white;
 	margin: 30px;
 	width: 1200px;
-	
+
 	text-align: center;
 
 	font-size: medium;
@@ -31,6 +34,15 @@ td {
 	background-color: #015266;
 
 }
+
+.socialmedialist{
+	list-style: none;
+	display: inline;
+
+	padding: 10px;
+
+}
+
 .thead{
 	padding: 20px;
 	height: 40px;
