@@ -1,120 +1,79 @@
+@import './core/reset.scss';
 * {
 	font-family: "Montserrat", sans-serif;
+
+}
+body{
+	margin: 30px;
+	background-color: #dcfffa;
 }
 .body {
 	display: flex;
+	flex-direction: column;
 	gap: 30px;
 	justify-items: center;
 	align-items: center;
-}
-.main {
-	width: 300px;
-	display: flex;
-	flex-direction: row;
+
 }
 
-img {
+.table {
+	padding: 20px;
+	color: white;
 	margin: 30px;
-	height: 60vh;
+	width: 1200px;
+	
+	text-align: center;
+
+	font-size: medium;
+}
+td {
+	padding: 20px;
+	background-color: #015266;
+
+}
+.thead{
+	padding: 20px;
+	height: 40px;
+	margin: 30px;
+	background-color: #003542;
+
 }
 h1 {
-	color: #8b192a;
+	color:#015266;
 }
-.text_intro {
-	width: 700px;
-}
-.caps {
-	text-transform: uppercase;
-}
-.bad_race_result_text {
-	font-size: 10px;
-	height: 15px;
-}
-.divbox {
+.formsearch{
 	display: flex;
 	flex-direction: row;
-	align-items: center;
-	gap: 34px;
-}
-.resultbox {
-	background-color: #c46170;
-	display: flex;
 	justify-content: center;
-	width: 700px;
-	padding: 10px;
-	border-radius: 5px;
-	color: white;
+	gap: 20px;
 }
-.resultboxGood {
-	background-color: #61bcc4;
+.divadd{
 	display: flex;
-	justify-content: center;
-	width: 700px;
-	padding: 10px;
-	border-radius: 5px;
-	color: white;
+	flex-direction: column;
+	gap: 20px;
+	
 }
-.resultboxBad {
-	background-color: #281114;
+.formadd{
+	
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	width: 700px;
-	padding: 10px;
-	border-radius: 5px;
-	color: white;
+	gap: 20px;
+	margin: 40px;
 }
-
+.formbox{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	width: 300px;
+}
 .button {
 	all: unset;
-	background-color: #8b192a;
-	padding: 5px;
+	background-color:#015266;
+	padding: 10px;
 	display: flex;
 	justify-content: center;
-	width: 80px;
+
 	border-radius: 5px;
 	color: white;
-	&__restart {
-		background-color: black;
-	}
-}
-.points_box {
-	display: flex;
-	width: 700px;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-}
-.players_box {
-	display: flex;
-	width: 100%;
 
-	justify-content: space-around;
-}
-.points {
-	font-weight: 400;
-	color: #8b192a;
-}
-
-.player {
-	text-align: justify;
-	width: 200px;
-}
-.restart {
-	all: unset;
-	background-color: black;
-	padding: 5px;
-	display: flex;
-	justify-content: center;
-	width: 130px;
-	border-radius: 5px;
-	color: white;
-}
-.collapsed {
-	display: none;
-}
-.done{
-	text-decoration: line-through;
-}
-.notdone{
-	text-decoration:none;
 }
