@@ -1,23 +1,28 @@
 
 import '../styles/App.scss';
-import contacts from '../data/contacts'
-import { useState} from 'react';
+import { useEffect, useState } from 'react';
+import fetchAdalabers from '../services/api'
 
 
 
 const App = () => {
   //varstate
-  const [data, setData] = useState(contacts.results);
+  const [data, setData] = useState([]);
   const [searchName, setSearchName] = useState('');
-  const [searchCounselor, setSearchCounselor] = useState('');
+  const [searchCounselor, setSearchCounselor] =   useState('Todos');
   const [newAdalaber, setNewAdalaber] = useState({
-    "id": "",
+    'id':crypto.randomUUID(),
     "name": "",
     "counselor": "",
     "speciality": "",
+    "social_networks": [],
   });
   //useffect
-
+  useEffect(() => {
+    fetchAdalabers().then((response) => {
+      setData(response);
+    });
+  }, []);
 
   //handlers
 
@@ -25,13 +30,14 @@ const App = () => {
     setNewAdalaber({ ...newAdalaber, [ev.target.id]: ev.target.value });
   };
   const handleClick = (ev) => {
-    ev.preventDefault();
+    ev.preventDefault(); 
     setData([...data, newAdalaber]);
     setNewAdalaber({
-      "id": "",
+      'id':crypto.randomUUID(),
       "name": "",
       "counselor": "",
       "speciality": "",
+      "social_networks": [],
     })
 
   };
@@ -39,49 +45,49 @@ const App = () => {
 
     setSearchName(ev.target.value);
   }
-  const handleSearchCouselor = (ev) => {
+  const handleSearchCounselor = (ev) => {
     setSearchCounselor(ev.target.value);
   }
   //fctions
- 
+
 
   const htmlData = data
     .filter((filterName) => filterName.name.toLowerCase().includes(searchName.toLowerCase()))
     .filter((filterCounselor) => {
       let result = '';
       if (searchCounselor === 'Todos') {
-         result = true;
+        result = true;
         return result;
       }
       else if (filterCounselor.counselor === searchCounselor) {
         result = true;
         return result;
       }
+     
       return result;
     })
     .map((adalaber) => {
-      const socialNetworks = (adalaber.social_networks).map((social, index)=> {
+      const socialNetworks = (adalaber.social_networks).map((social, index) => {
         return (
-       <li key={index} className='socialmedialist'>
-          <a href={social.url}>{social.name}</a>
+          <li key={index} className='socialmedialist'>
+            <a href={social.url}>{social.name}</a>
           </li>
-
-        )});
-      
+        )
+      });
       return (
-        <tr key={adalaber.id}>
+        <tr key={adalaber.id} className='column'>
           <td>{adalaber.name}</td>
           <td>{adalaber.counselor}</td>
           <td>{adalaber.speciality}</td>
-          <td>   <ul>{socialNetworks}</ul> </td>
-         
+          <td>   <ul> {socialNetworks}</ul> </td>
+
         </tr>
 
       )
     });
- 
 
-  
+
+
   return (
     <div>
       <h1>Adalabers</h1>
@@ -90,29 +96,29 @@ const App = () => {
           <label htmlFor="">Nombre</label>
           <input type="text" placeholder=' Ej: MariCarmen' onInput={handleSearchName} value={searchName} />
           <label htmlFor="">Escoje una tutora</label>
-          <select name="" id="" className="" onChange={handleSearchCouselor}>
+          <select name="" id="" className="" value={searchCounselor} onChange={handleSearchCounselor}>
             <option disabled>Escoge una opción</option>
             <option value="Todos">Todos</option>
             <option value="Dayana">Dayana</option>
             <option value="Iván">Iván</option>
             <option value="Yanelis">Yanelis</option>
-
+            <option value="Miguel">Miguel</option>
           </select>
         </form>
       </div>
       <div className='superdivtable'>
-      <table className="table">
-        <thead className="thead"><tr>
-          <th>Nombre</th>
-          <th>Tutora</th>
-          <th>Especialidad</th>
-          <th colSpan={3} className='socialmediacolum'>Redes</th>
-       
-        </tr></thead>
-        <tbody>
-          {htmlData}
-        </tbody>
-      </table>
+        <table className="table">
+          <thead className="thead"><tr key='001' className='column'>
+            <th>Nombre</th>
+            <th>Tutora</th>
+            <th>Especialidad</th>
+            <th colSpan={3} className='socialmediacolum'>Redes</th>
+
+          </tr></thead>
+          <tbody>
+            {htmlData}
+          </tbody>
+        </table>
       </div>
       <h2>Añadir una Adalaber</h2>
       <div className='divadd'>
