@@ -15,6 +15,7 @@ const App = () => {
     "speciality": "",
     "social_networks": [],
   });
+ const [message, setMessage] = useState('');
   //useffect
   useEffect(() => {
     fetchAdalabers().then((response) => {
@@ -24,11 +25,21 @@ const App = () => {
 
   //handlers
   const handleNewAdalaber = (ev) => {
-    setNewAdalaber({ ...newAdalaber, [ev.target.id]: ev.target.value });
+     setNewAdalaber({ ...newAdalaber, [ev.target.id]: ev.target.value });
+   
   };
   const handleClick = (ev) => {
     ev.preventDefault();
-    setData([...data, newAdalaber]);
+ 
+    if( newAdalaber.name === '' && newAdalaber.counselor === ''&& newAdalaber.speciality === ''){
+      setNewAdalaber({ ...newAdalaber, [ev.target.id]: ev.target.value });
+      setMessage('Debe rellenar al menos uno de los campos. GRACIAS');
+    }
+    else if (!( newAdalaber.name !== '' && newAdalaber.counselor !== ''&& newAdalaber.speciality !== '')){
+      setData([...data, newAdalaber]);
+      setMessage('');
+    }
+  
     setNewAdalaber({
       'id': crypto.randomUUID(),
       "name": "",
@@ -129,6 +140,7 @@ const App = () => {
                 <input type="text" id="speciality" onInput={handleNewAdalaber} value={newAdalaber.speciality} />
               </div>
             </div>
+            <p className='message'>{message}</p>
             <button className="button" onClick={handleClick}>Añadir una nueva Adalaber</button>
           </form>
         </div>
